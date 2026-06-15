@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:property name="FOV" value="60" />
+
+    <gazebo>
+        <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
+            <left_joint>base_left_wheel_joint</left_joint>
+            <right_joint>base_right_wheel_joint</right_joint>
+            <frame_id>odom</frame_id>
+            <child_frame_id>base_footprint</child_frame_id>
+            <wheel_separation>0.45</wheel_separation>
+            <wheel_radius>0.1</wheel_radius>
+        </plugin>
+    </gazebo>
+
+
+    <gazebo reference="caster_wheel_link">  
+        <mu1 value="0.1" /> 
+        <mu2 value="0.1" /> 
+    </gazebo>
+
+    <gazebo>
+        <plugin
+            filename="gz-sim-joint-state-publisher-system"
+            name="gz::sim::systems::JointStatePublisher">
+        </plugin>
+    </gazebo>
+
+    <gazebo reference="camera_link">
+        <sensor type="camera" name="drive_camera">
+            <pose relative_to='camera_link'>0 0 0 0 0 0</pose>
+            <camera>
+                <horizontal_fov>${FOV * pi / 180}</horizontal_fov>
+                <image>
+                    <width>720</width>
+                    <height>480</height>
+                </image>
+                <clip>
+                    <near>0.1</near>
+                    <far>100</far>
+                </clip>
+            </camera>
+            <always_on>1</always_on>
+            <update_rate>15</update_rate>
+            <visualize>true</visualize>
+            <topic>camera/image_raw</topic>
+        </sensor>
+    </gazebo>
+
+    <gazebo reference="base_link">
+        <enable_wind>false</enable_wind>
+    </gazebo>
+</robot>

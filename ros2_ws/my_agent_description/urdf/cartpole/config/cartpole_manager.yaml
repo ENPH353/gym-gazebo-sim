@@ -1,0 +1,17 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 15
+
+    # Broadcasts the positions/velocities of cart and pole to your script
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    # Receives the velocity command from your script
+    cart_velocity_controller:
+      type: forward_command_controller/ForwardCommandController
+
+cart_velocity_controller:
+  ros__parameters:
+    joints:
+      - slider_to_cart
+    interface_name: velocity  # Tells ROS 2 to accept velocity commands
