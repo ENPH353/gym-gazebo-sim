@@ -1,5 +1,4 @@
 # Custom gymnasium environment for cartpole training
-import subprocess
 import rclpy
 import time
 import math

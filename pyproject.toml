@@ -1,21 +1,34 @@
 [build-system]
-requires = ["setuptools>=61.0.0", "wheel"]
+requires = ["setuptools >= 77.0.3"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "gym-gazebo-sim"
-version = "0.1.0"
-description = "A Gymnasium interface for ROS 2 and Gazebo Sim environments"
-readme = "README.md"
-requires-python = ">=3.10"
+name = "gym_gazebo_sim"
+version = "0.0.1"
 dependencies = [
-    "gymnasium>=0.29.0",
-    "numpy>=1.24.0",
-    # Do NOT put rclpy here. rclpy cannot be installed via pip, 
-    # it must come from the user's global ROS 2 installation.
+    "gymnasium>1.3.0",
+    "torch>=2.12.0",
+    "tensorboard",
+    "numpy>=1.26.0",
+]
+requires-python = ">=3.12.3"
+authors = [
+    { name="Taiga Momose", email="taigasery78@gmail.com" },
+]
+description = "A package to provide a gym environment for Gazebo simulation."
+readme = "README.md"
+license = {text = "MIT"}
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Build Tools",
+    "Programming Language :: Python :: 3",
+    "Operating System :: Unix",
 ]
 
-[tool.setuptools.packages.find]
-# This tells pip to only grab the gym_gazebo python folder, 
-# and ignore the train scripts and ROS 2 workspace.
-include = ["gym_gazebo*"]
+[project.urls]
+Homepage = "https://github.com/SniperReborn/gym-gazebo-sim"
+Issues = "https://github.com/SniperReborn/gym-gazebo-sim/issues"
+
+[tool.setuptools]
+license-files = ["LICEN[CS]E*"]
