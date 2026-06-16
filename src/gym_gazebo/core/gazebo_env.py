@@ -21,14 +21,9 @@ class GazeboEnv(gym.Env):
         # Copy the terminal environment
         terminal_env = os.environ.copy()
 
-        # launch and source command
-        launch_cmd = (
-                f"ros2 launch {launch_pkg} {launch_file}"
-        )
-
         # Launch gazebo using the launch file
         self.sim_process = subprocess.Popen(
-            launch_cmd,
+            ["ros2", "launch", launch_pkg, launch_file],
             env=terminal_env,            
             stderr=subprocess.STDOUT,      
             preexec_fn=os.setsid          
