@@ -18,15 +18,26 @@ class GazeboEnv(gym.Env):
 
         print(f"Launching {launch_file} from {launch_pkg}.")
 
+        # Find install path of the default ROS2 workspace
+        core_dir = os.path.dirname(os.path.abspath(__file__))
+        root_dir = os.path.abspath(os.path.join(core_dir, "../..")) # gym_gazebo_sim
+        install_dir = os.path.join(root_dir, "ros2_ws", "install", "setup.bash")
+
         # Copy the terminal environment
         terminal_env = os.environ.copy()
 
+        # launch and source command
+        launch_cmd = (
+                f"source {install_dir} && "
+                f"ros2 launch {launch_pkg} {launch_file}"
+        )
+
         # Launch gazebo using the launch file
         self.sim_process = subprocess.Popen(
-            ["ros2", "launch", launch_pkg, launch_file],
-            env=terminal_env,
-            stderr=subprocess.STDOUT,
-            preexec_fn=os.setsid
+            launch_cmd,
+            shell=True,                   # Allows us to use '&&' and 'source'
+            executable='/bin/bash',       # Forces Ubuntu to use bash instead of sh (required for 'source')
+            preexec_fn=os.setsid          
         )
 
         # Buffer to wait for Gazebo to finish booting
@@ -55,6 +66,17 @@ class GazeboEnv(gym.Env):
     
     def user_close(self): 
         raise NotImplementedError
+    
+    def close(self):
+        # Run user logic first
+        self.user_close()
+
+        # Terminate the Gazebo process
+        subprocess.run(["pkill", "-f", "gz sim"])
+        subprocess.run(["pkill", "-f", "gz sim server"])
+        subprocess.run(["pkill", "-f", "gzsim gui"])   
+        subprocess.run(["pkill", "-9", "-f", "ros_gz_bridge"])
+        subprocess.run(["pkill", "-9", "-f", "ros2 launch"])
 
     # HELPER FUNCTIONS
     def _seed(self, seed=None):
@@ -94,13 +116,3 @@ class GazeboEnv(gym.Env):
     def _reset_agents(self):
         # Sending the reset message
         self.pub_reset_msg.publish(self.reset_msg)
-
-    def _close(self):
-        # Run user logic first
-        self.user_close()
-
-        # Terminate the Gazebo process
-        subprocess.run(["pkill", "-f", "gz sim"])
-        subprocess.run(["pkill", "-f", "gz-sim-server"])
-        subprocess.run(["pkill", "-f", "gz-sim-gui"])   
-        self.gz_node.close()

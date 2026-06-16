@@ -1,4 +1,5 @@
 # Custom gymnasium environment for cartpole training
+import subprocess
 import rclpy
 import time
 import math
@@ -12,6 +13,9 @@ from gym_gazebo.utils import cartpole_utils
 
 class CartpoleEnv(GazeboEnv):
     def __init__(self):
+        # Sourcing the ROS2 workspace
+        
+
         # Intializing ROS2
         rclpy.init(args=None)
 
@@ -131,4 +135,5 @@ class CartpoleEnv(GazeboEnv):
     # Shutting down ROS2
     def user_close(self):
         self.ros_node.destroy_node()
-        rclpy.shutdown()
+        if rclpy.ok():
+            rclpy.shutdown()

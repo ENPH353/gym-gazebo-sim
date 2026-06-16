@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gym-gazebo-sim"
+version = "0.1.0"
+description = "A Gymnasium interface for ROS 2 and Gazebo Sim environments"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "gymnasium>=0.29.0",
+    "numpy>=1.24.0",
+    # Do NOT put rclpy here. rclpy cannot be installed via pip, 
+    # it must come from the user's global ROS 2 installation.
+]
+
+[tool.setuptools.packages.find]
+# This tells pip to only grab the gym_gazebo python folder, 
+# and ignore the train scripts and ROS 2 workspace.
+include = ["gym_gazebo*"]

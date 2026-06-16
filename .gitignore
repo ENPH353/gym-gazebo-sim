@@ -1,0 +1,13 @@
+# Python ignores
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+# ROS 2 Colcon ignores
+ros2_ws/build/
+ros2_ws/install/
+ros2_ws/log/
