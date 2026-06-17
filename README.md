@@ -61,6 +61,8 @@ The API also provides a ros2 workspace that comes installed with packages for pr
   filename="libResetSimPlugin.so"
   name="reset::ResetSimPlugin">
 </plugin>
+
+- In addition to the prebuilt environments are two training scripts that are available for demo inside the `training_scripts/` directory. These can be run as normal python scripts using the terminal.
 ```
 ## Getting Started
 
