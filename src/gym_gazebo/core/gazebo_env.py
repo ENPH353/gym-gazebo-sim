@@ -4,6 +4,7 @@ import subprocess
 
 import gymnasium as gym
 from gymnasium.utils import seeding
+from ament_index_python.packages import get_package_prefix
 
 # Gazebo Transport Imports
 from gz.msgs10.world_control_pb2 import WorldControl
@@ -20,6 +21,15 @@ class GazeboEnv(gym.Env):
 
         # Copy the terminal environment
         terminal_env = os.environ.copy()
+
+        plugin_pkg_install_path = get_package_prefix('custom_plugins')
+        plugin_lib_path = os.path.join(plugin_pkg_install_path, 'lib')
+        
+        if "GZ_SIM_SYSTEM_PLUGIN_PATH" in terminal_env:
+                terminal_env["GZ_SIM_SYSTEM_PLUGIN_PATH"] += f":{plugin_lib_path}"
+        else:
+            terminal_env["GZ_SIM_SYSTEM_PLUGIN_PATH"] = plugin_lib_path
+
 
         # Launch gazebo using the launch file
         self.sim_process = subprocess.Popen(

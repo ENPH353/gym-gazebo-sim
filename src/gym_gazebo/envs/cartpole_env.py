@@ -12,9 +12,6 @@ from gym_gazebo.utils import cartpole_utils
 
 class CartpoleEnv(GazeboEnv):
     def __init__(self):
-        # Sourcing the ROS2 workspace
-        
-
         # Intializing ROS2
         rclpy.init(args=None)
 
@@ -86,13 +83,14 @@ class CartpoleEnv(GazeboEnv):
 
         # Unpause the sim
         self._pause_sim(False)
+
         time.sleep(0.1) # Wait 100 ms
         
         self.is_resetting = False
 
         # Wait for next observation to come in before kickstarting the data loop
         while not self.new_obs_event:
-            # Telling executor (node) to 
+            # Telling executor (node) to spin
             rclpy.spin_once(self.ros_node, timeout_sec=0.01)
         self.new_obs_event = True
 

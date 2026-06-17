@@ -1,3 +1,5 @@
+from .core.gazebo_env import GazeboEnv
+from .envs.cartpole_env import CartpoleEnv
 from gymnasium.envs.registration import register
 
 register(
