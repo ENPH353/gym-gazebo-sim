@@ -209,9 +209,6 @@ This project is licensed under the [MIT] License - see the LICENSE.md file for d
 **Inspiration and code snippets:**
 * AcutronicRobotics for [gym-gazebo2](https://github.com/acutronicRobotics/gym-gazebo2)
 * The Farama Foundation for [the Gymnasium API](https://github.com/farama-foundation/gymnasium)
-
-**Contributors:**
-- Miti Isbasescu
-- [Google Gemini](https://gemini.google.com)
+* Google for coding assistance with [Google Gemini](https://gemini.google.com)
 
 
