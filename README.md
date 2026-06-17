@@ -9,34 +9,47 @@ The API also provides a ros2 workspace that comes installed with packages for pr
 #### Features:
 - Currently, the API provides an abstract class called `GazeboEnv` that inherits the standard gymnasium `Env` class with the following helper methods added:
 
-> [!info] | Method: `_pause_sim(self, pause: bool)`
-> **What it does:** Pauses and resumes the Gazebo simulation.
+> **Method:** `_pause_sim(self, pause: bool)`
+>
+> **Usage:** Pauses and resumes the Gazebo simulation.
 > 
-> **Key Parameters:**
+> **Parameters:**
 > * `pause` (bool): Set to `True` to freeze simulation physics; set to `False` to resume normal simulation. 
 
-> [!info] | Method: `_step_physics(self, iterations: int)`
-> **What it does:** Advances the Gazebo simulation clock forward by a specific number of steps whilst keeping the simulation otherwise paused.
+<br/>
+
+> **Method:** `_step_physics(self, iterations: int)`
+>
+> **Usage:** Advances the Gazebo simulation clock forward by a specific number of steps whilst keeping the simulation otherwise paused.
 > 
-> **Key Parameters:**
+> **Parameters:**
 > * `iterations` (int): The number of individual physics steps the simulator should execute before pausing.
 
-> [!info] | Method: `_reset_agents(self)`
-> **What it does:** Instantly resets the environment's agents back to their starting poses and joint states using a custom reset plugin that is built as a package in `ros2_ws`.
+<br/>
+
+> **Method:** `_reset_agents(self)`
+>
+> **Usage:** Instantly resets the environment's agents back to their starting poses and joint states using a custom reset plugin that is built as a package in `ros2_ws`.
 > 
-> **Key Parameters:**
+> **Parameters:**
 > * *None*
 
-> [!info] | Method: `user_close(self)`
-> **What it does:** An abstract placeholder method that is designed to force child subclasses inheriting from `GazeboEnv` to define its own cleanup behaviour (*i.e.: shutting down ros2 nodes*).
+<br/>
+
+> **Method:** `user_close(self)`
+>
+> **Usage:** An abstract placeholder method that is designed to force child subclasses inheriting from `GazeboEnv` to define its own cleanup behaviour (*i.e.: shutting down ros2 nodes*).
 > 
-> **Key Parameters:**
+> **Parameters:**
 > * *None*
 
-> [!info] | Method: `close(self)`
-> **What it does:** First executes user-defined shutdown logic written in `user_close()` and then terminates all Gazebo simulator instances, GUI instances, and ros2 bridges and launch processes. 
+<br/>
+
+> **Method:** `close(self)`
+>
+> **Usage:** First executes user-defined shutdown logic written in `user_close()` and then terminates all Gazebo simulator instances, GUI instances, and ros2 bridges and launch processes. 
 > 
-> **Key Parameters:**
+> **Parameters:**
 > * *None*
 
 - The API also provides a ros2 package inside `ros2_ws/src/` called `custom_plugins` that houses a reset plugin that directly communicates with Gazebo Sim to find all non-static entities and teleports them to their original spawn positions and joint states.
