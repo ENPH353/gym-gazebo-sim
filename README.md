@@ -89,12 +89,12 @@ git clone https://github.com/SniperReborn/gym-gazebo-sim.git
 cd gym_gazebo_sim
 ```
 
-**3. Run the installation script
+**3**. Run the installation script
 ```
 ./install.sh
 ```
 
-**4a. (Optional) Sourcing the API's prebuilt ros2 workspace:**
+**4a. Sourcing the API's prebuilt ros2 workspace:**
 - This step is required if you want to use the prebuilt environments that `gym-gazebo-sim` offers.
 
 ```
@@ -102,7 +102,7 @@ cd gym_gazebo_sim
 source ros2_ws/install/setup.bash
 ```
 
-**4b. (Optional) Importing the custom reset plugin:**
+**4b. Importing the custom reset plugin:**
 - This step is required for users that want to build their own environment using `gym_gazebo_sim` since the API uses a custom reset plugin that teleports all non-static entities back to their spawn points.
 - The command below will copy the API's `custom_plugins` package to your ros2 workspace's source folder.
 
