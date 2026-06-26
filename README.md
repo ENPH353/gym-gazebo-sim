@@ -5,7 +5,7 @@ Gym-Gazebo-Sim is a simple wrapper and Gazebo plugin that extends the Gymnasium 
 
 Gym-Gazebo-Sim provides an abstract class with helper methods called `GazeboEnv` which communicates with Gazebo Sim's internal transport network. This enables developers to inherit the class to create their own environments without having to interface directly with Gazebo Sim internal structure.
 
-The API also provides a ros2 workspace that comes installed with packages for prebuilt environments and a C++ reset plugin that users can call which teleports all non-static entities back to their starting positions.
+The API also provides a ROS2 workspace that comes installed with packages for prebuilt environments and a C++ reset plugin that users can call which teleports all non-static entities back to their starting positions.
 #### Features:
 - Currently, the API provides an abstract class called `GazeboEnv` that inherits the standard gymnasium `Env` class with the following helper methods added:
 
@@ -38,7 +38,7 @@ The API also provides a ros2 workspace that comes installed with packages for pr
 
 > **Method:** `user_close(self)`
 >
-> **Usage:** An abstract placeholder method that is designed to force child subclasses inheriting from `GazeboEnv` to define its own cleanup behaviour (*i.e.: shutting down ros2 nodes*).
+> **Usage:** An abstract placeholder method that is designed to force child subclasses inheriting from `GazeboEnv` to define its own cleanup behaviour (*i.e.: shutting down ROS2 nodes*).
 > 
 > **Parameters:**
 > * *None*
@@ -47,14 +47,14 @@ The API also provides a ros2 workspace that comes installed with packages for pr
 
 > **Method:** `close(self)`
 >
-> **Usage:** First executes user-defined shutdown logic written in `user_close()` and then terminates all Gazebo simulator instances, GUI instances, and ros2 bridges and launch processes. 
+> **Usage:** First executes user-defined shutdown logic written in `user_close()` and then terminates all Gazebo simulator instances, GUI instances, and ROS2 bridges and launch processes. 
 > 
 > **Parameters:**
 > * *None*
 
-- The API also provides a ros2 package inside `ros2_ws/src/` called `custom_plugins` that houses a reset plugin that directly communicates with Gazebo Sim to find all non-static entities and teleports them to their original spawn positions and joint states.
+- The API also provides a ROS2 package inside `ros2_ws/src/` called `custom_plugins` that houses a reset plugin that directly communicates with Gazebo Sim to find all non-static entities and teleports them to their original spawn positions and joint states.
   
-  The plugin can be added to any custom workspace by just copy and pasting the package directory (see install instructions) into your own ros2 workspace folder, and then adding the following tags to your `.sdf`:
+  The plugin can be added to any custom workspace by just copy and pasting the package directory (see install instructions) into your own ROS2 workspace folder, and then adding the following tags to your `.sdf`:
   
 ```
 <plugin
@@ -69,14 +69,15 @@ The API also provides a ros2 workspace that comes installed with packages for pr
 
 ### Pre-Requisites
 * **OS:** Ubuntu 24.04
-* **ros2:** Jazzy Jalisco
+* **ROS2:** Jazzy Jalisco
+* **Gazebo-sim:** Harmonic
 * **Python:** 3.10+
 * **Core Dependencies:** Gymnasium 1.3.0+, Numpy 1.26+
 ### Installation
-This project requires compiling both Python libraries and ros2 packages. We have provided a script to handle this.
+This project requires compiling both Python libraries and ROS2 packages. We have provided a script to handle this.
 
-**1. Source or create a ros accessible virtual environment**
-- The `--system-site-packages` flag will enable the virtual environment access the global ros2 `rclpy` libraries
+**1. Source or create a ROS accessible virtual environment**
+- The `--system-site-packages` flag will enable the virtual environment access the global ROS2 `rclpy` libraries
 ```
 (Inside your own desired venvs folder)
 python3 -m venv your_venv_name --system-site-packages
@@ -84,7 +85,7 @@ python3 -m venv your_venv_name --system-site-packages
 **2. Clone the repository**
 ```
 (Inside your own desired install folder)
-git clone https://github.com/SniperReborn/gym-gazebo-sim.git
+git clone https://github.com/ENPH353/gym-gazebo-sim.git
 
 cd gym_gazebo_sim
 ```
@@ -94,7 +95,7 @@ cd gym_gazebo_sim
 ./install.sh
 ```
 
-**4a. Sourcing the API's prebuilt ros2 workspace:**
+**4a. Sourcing the API's prebuilt ROS2 workspace:**
 - This step is required if you want to use the prebuilt environments that `gym-gazebo-sim` offers.
 
 ```
@@ -104,7 +105,7 @@ source ros2_ws/install/setup.bash
 
 **4b. Importing the custom reset plugin:**
 - This step is required for users that want to build their own environment using `gym_gazebo_sim` since the API uses a custom reset plugin that teleports all non-static entities back to their spawn points.
-- The command below will copy the API's `custom_plugins` package to your ros2 workspace's source folder.
+- The command below will copy the API's `custom_plugins` package to your ROS2 workspace's source folder.
 
 ```
 (Inside the root folder gym_gazebo_sim)
@@ -192,7 +193,7 @@ class CustomEnv(GazeboEnv):
 ```
 ## Help
 
-Please email me at taigasery78@gmail.com for help or raise an issue on this GitHub page.
+Please email me at taigasery78@gmail.com or miti@phas.ubc.ca for help or raise an issue on this GitHub page.
 ## Authors
 
 - [Taiga Momose](https://www.linkedin.com/in/taiga-momose/)
@@ -210,6 +211,7 @@ This project is licensed under the [MIT] License - see the LICENSE.md file for d
 ## Acknowledgments
 
 **Inspiration and code snippets:**
+* Erle Robotics for [gym-gazebo](https://github.com/erlerobot/gym-gazebo/)
 * AcutronicRobotics for [gym-gazebo2](https://github.com/acutronicRobotics/gym-gazebo2)
 * The Farama Foundation for [the Gymnasium API](https://github.com/farama-foundation/gymnasium)
 * Google for coding assistance with [Google Gemini](https://gemini.google.com)
