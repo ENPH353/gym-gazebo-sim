@@ -92,11 +92,13 @@ cd gym_gazebo_sim
 ```
 
 **3**. Run the installation script
+- NOTE: This will install an additional 6GB of software.
+
 ```
 ./install.sh
 ```
 
-**4a. Sourcing the API's prebuilt ROS2 workspace:**
+**4. Sourcing the API's prebuilt ROS2 workspace:**
 - This step is required if you want to use the prebuilt environments that `gym-gazebo-sim` offers.
 
 ```
@@ -104,7 +106,19 @@ cd gym_gazebo_sim
 source ros2_ws/install/setup.bash
 ```
 
-**4b. Importing the custom reset plugin:**
+**5. Run example training scripts**
+- To check if the package was installed correctly run the training scripts.
+
+```
+cd training_scripts
+
+./train_cartpole.py
+OR
+./train_linefollower.py
+```
+- If the installation was successful you will see the cartpole robot learning to balance or a robot learning to follow a line.
+
+**6. Importing the custom reset plugin:**
 - This step is required for users that want to build their own environment using `gym_gazebo_sim` since the API uses a custom reset plugin that teleports all non-static entities back to their spawn points.
 - The command below will copy the API's `custom_plugins` package to your ROS2 workspace's source folder.
 
