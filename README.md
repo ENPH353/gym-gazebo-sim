@@ -73,10 +73,10 @@ The API also provides a ROS2 workspace that comes installed with packages for pr
 * **Gazebo-sim:** Harmonic
 * **Python:** 3.10+
 ### Installation
-Ensure that the ros-jazzy-joint-state-broadcaster, ros-jazzy-gz-ros2-control package are installed
+Ensure that the ros-jazzy-joint-state-broadcaster, ros-jazzy-ros2-controllers and ros-jazzy-gz-ros2-control package are installed
 
 ```
-sudo apt install ros-jazzy-joint-state-broadcaster ros-jazzy-gz-ros2-control
+sudo apt install ros-jazzy-joint-state-broadcaster ros-jazzy-ros2-controllers ros-jazzy-gz-ros2-control
 ```
 
 This project requires compiling both Python libraries and ROS2 packages. We have provided a script to handle this.
