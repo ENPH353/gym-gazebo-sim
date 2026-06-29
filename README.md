@@ -72,8 +72,13 @@ The API also provides a ROS2 workspace that comes installed with packages for pr
 * **ROS2:** Jazzy Jalisco
 * **Gazebo-sim:** Harmonic
 * **Python:** 3.10+
-* **Core Dependencies:** Gymnasium 1.3.0+, Numpy 1.26+
 ### Installation
+Ensure that the ros-jazzy-joint-state-broadcaster, ros-jazzy-gz-ros2-control package are installed
+
+```
+sudo apt install ros-jazzy-joint-state-broadcaster ros-jazzy-gz-ros2-control
+```
+
 This project requires compiling both Python libraries and ROS2 packages. We have provided a script to handle this.
 
 **1. Source or create a ROS accessible virtual environment**
