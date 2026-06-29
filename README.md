@@ -79,8 +79,9 @@ This project requires compiling both Python libraries and ROS2 packages. We have
 **1. Source or create a ROS accessible virtual environment**
 - The `--system-site-packages` flag will enable the virtual environment access the global ROS2 `rclpy` libraries
 ```
-(Inside your own desired venvs folder)
-python3 -m venv your_venv_name --system-site-packages
+(Inside your own desired venvs folder create a ros2_env)
+python3 -m venv ros2_venv --system-site-packages
+source ./ros2_env/bin/activate
 ```
 **2. Clone the repository**
 ```
