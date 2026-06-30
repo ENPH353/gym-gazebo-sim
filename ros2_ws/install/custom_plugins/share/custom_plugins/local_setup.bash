@@ -1,1 +1,0 @@
-/home/fizzer/gym_gazebo_sim/ros2_ws/build/custom_plugins/ament_cmake_environment_hooks/local_setup.bash

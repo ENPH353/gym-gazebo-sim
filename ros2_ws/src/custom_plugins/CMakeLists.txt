@@ -34,6 +34,7 @@ target_include_directories(ResetSimPlugin PUBLIC
 target_link_libraries(ResetSimPlugin PUBLIC
   gz-sim8::gz-sim8
   gz-plugin2::gz-plugin2
+  rclcpp::rclcpp
 )
 
 # Install the compiled .so file

@@ -14,6 +14,8 @@
 
 #include <gz/common/Console.hh>
 
+#include <rclcpp/rclcpp.hpp>
+
 using namespace reset_plugin; // Lets me use reset_plugin methods without having to write reset_plugin:: every time
 
 // Good practice to comment out passed in variables we won't use to stop the compiler from throwing warnings
@@ -25,11 +27,11 @@ void ResetSimPlugin::Configure(const gz::sim::Entity &/*_entity*/,
     // Subscribe to the GUI's keystroke topic
     if (this->node.Subscribe("/keyboard/keypress", &ResetSimPlugin::OnKeyPress, this))
     {
-        gzerr << "[ResetSimPlugin] Successfully subscribed to keyboard events!" << std::endl;
+        std::cout << "[ResetSimPlugin] Successfully subscribed to keyboard events!" << std::endl;
     }
     else
     {
-        gzerr << "[ResetSimPlugin] Failed to subscribe to keyboard topic." << std::endl;
+        std::cout << "[ResetSimPlugin] Failed to subscribe to keyboard topic." << std::endl; 
     }
 }
 
@@ -85,7 +87,7 @@ void ResetSimPlugin::PreUpdate(const gz::sim::UpdateInfo &/*_info*/, gz::sim::En
                         if (!is_static)
                         {
                             this->initial_poses[_modelEntity] = _poseComp->Data();
-                            gzerr << "[ResetSimPlugin] Startup snapshot saved for: " 
+                            std::cout << "[ResetSimPlugin] Startup snapshot saved for: " 
                                   << _nameComp->Data() << std::endl;
                         }
                         return true;
@@ -93,7 +95,7 @@ void ResetSimPlugin::PreUpdate(const gz::sim::UpdateInfo &/*_info*/, gz::sim::En
 
                 // 4. Lock the system forever
                 this->startup_memorized = true;
-                gzerr << "[ResetSimPlugin] Startup sequence complete. Memory locked." << std::endl;
+                std::cout << "[ResetSimPlugin] Startup sequence complete. Memory locked." << std::endl;
             }
         }
         
@@ -135,9 +137,9 @@ void ResetSimPlugin::PreUpdate(const gz::sim::UpdateInfo &/*_info*/, gz::sim::En
     }
 
     if (found_something_to_reset) {
-        gzerr << "[ResetSimPlugin] Successfully teleported agents to settled spawn points!" << std::endl;
+        std::cout << "[ResetSimPlugin] Successfully teleported agents to settled spawn points!" << std::endl;
     } else {
-        gzerr << "[ResetSimPlugin] Reset Failed: No dynamic models found in memory!" << std::endl;
+        std::cout << "[ResetSimPlugin] Reset Failed: No dynamic models found in memory!" << std::endl;
     }
 
     this->teleport_requested = false;

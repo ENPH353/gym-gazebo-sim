@@ -9,8 +9,7 @@
 
 namespace reset_plugin
 {
-
-class ResetSimPlugin :
+    class ResetSimPlugin :
     public gz::sim::System,
     public gz::sim::ISystemConfigure,
     public gz::sim::ISystemPreUpdate
