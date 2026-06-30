@@ -1,7 +1,11 @@
 # Python ignores
 __pycache__/
+*.egg-info/
 
 # ROS 2 Colcon ignores
 ros2_ws/build/
 ros2_ws/log/
 ros2_ws/install/
+
+# Tensorboard runs
+training_scripts/runs/
