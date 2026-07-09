@@ -33,7 +33,8 @@ namespace reset_plugin
             // Function to handle logic for recieving a key press
             void OnKeyPress(const gz::msgs::Int32 &_msg);
             
-            // Creation of a node for the plugin that will subscribe to the keypress topic
+            // Creation of a node for the plugin that will subscribe to the 
+            // keypress topic
             gz::transport::Node node;
 
             // THE STARTUP LOCK
@@ -43,7 +44,8 @@ namespace reset_plugin
             // THE MEMORY BANK
             std::unordered_map<gz::sim::Entity, gz::math::Pose3d> initial_poses;
             
-            // A thread-safe flag to tell the physics thread to teleport the robot
+            // A thread-safe flag to tell the physics thread to teleport the 
+            // robot
             std::atomic<bool> teleport_requested{false};
     };
 }
