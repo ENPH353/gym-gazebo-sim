@@ -1,13 +1,24 @@
 # Gym-Gazebo-Sim
 
-Gym-Gazebo-Sim is a simple wrapper and Gazebo plugin that extends the Gymnasium API for Gazebo Sim Harmonic and ROS2 Jazzy for developers and researchers seeking to use Gazebo Sim for reinforcement learning.
+Gym-Gazebo-Sim is a simple wrapper and Gazebo plugin that extends the Gymnasium 
+API for Gazebo Sim Harmonic and ROS2 Jazzy for developers and researchers 
+seeking to use Gazebo Sim for reinforcement learning.
+
 ## Description
 
-Gym-Gazebo-Sim provides an abstract class with helper methods called `GazeboEnv` which communicates with Gazebo Sim's internal transport network. This enables developers to inherit the class to create their own environments without having to interface directly with Gazebo Sim internal structure.
+Gym-Gazebo-Sim provides an abstract class with helper methods called 
+`GazeboEnv` which communicates with Gazebo Sim's internal transport network. 
+This enables developers to inherit the class to create their own environments
+without having to interface directly with Gazebo Sim internal structure.
 
-The API also provides a ROS2 workspace that comes installed with packages for prebuilt environments and a C++ reset plugin that users can call which teleports all non-static entities back to their starting positions.
+The API also provides a ROS2 workspace that comes installed with packages for 
+prebuilt environments and a C++ reset plugin that users can call which 
+teleports all non-static entities back to their starting positions.
+
 #### Features:
-- Currently, the API provides an abstract class called `GazeboEnv` that inherits the standard gymnasium `Env` class with the following helper methods added:
+- Currently, the API provides an abstract class called `GazeboEnv` that 
+inherits the standard gymnasium `Env` class with the following helper methods 
+added:
 
 > **Method:** `_pause_sim(self, pause: bool)`
 >
@@ -52,9 +63,14 @@ The API also provides a ROS2 workspace that comes installed with packages for pr
 > **Parameters:**
 > * *None*
 
-- The API also provides a ROS2 package inside `ros2_ws/src/` called `custom_plugins` that houses a reset plugin that directly communicates with Gazebo Sim to find all non-static entities and teleports them to their original spawn positions and joint states.
+- The API also provides a ROS2 package inside `ros2_ws/src/` called 
+`custom_plugins` that houses a reset plugin that directly communicates with 
+Gazebo Sim to find all non-static entities and teleports them to their original 
+spawn positions and joint states.
   
-  The plugin can be added to any custom workspace by just copy and pasting the package directory (see install instructions) into your own ROS2 workspace folder, and then adding the following tags to your `.sdf`:
+  The plugin can be added to any custom workspace by just copy and pasting the 
+  package directory (see install instructions) into your own ROS2 workspace 
+  folder, and then adding the following tags to your `.sdf`:
   
 ```
 <plugin
@@ -63,7 +79,9 @@ The API also provides a ROS2 workspace that comes installed with packages for pr
 </plugin>
 ```
 
-- In addition to the prebuilt environments are two training scripts that are available for demo inside the `training_scripts/` directory. These can be run as normal python scripts using the terminal.
+- In addition to the prebuilt environments are two training scripts that are 
+available for demo inside the `training_scripts/` directory. These can be run 
+as normal python scripts using the terminal.
 
 ## Getting Started
 
@@ -73,16 +91,19 @@ The API also provides a ROS2 workspace that comes installed with packages for pr
 * **Gazebo-sim:** Harmonic
 * **Python:** 3.10+
 ### Installation
-Ensure that the ros-jazzy-joint-state-broadcaster, ros-jazzy-ros2-controllers and ros-jazzy-gz-ros2-control package are installed
+Ensure that the ros-jazzy-joint-state-broadcaster, ros-jazzy-ros2-controllers 
+and ros-jazzy-gz-ros2-control package are installed.
 
 ```
 sudo apt install ros-jazzy-joint-state-broadcaster ros-jazzy-ros2-controllers ros-jazzy-gz-ros2-control
 ```
 
-This project requires compiling both Python libraries and ROS2 packages. We have provided a script to handle this.
+This project requires compiling both Python libraries and ROS2 packages. We 
+have provided a script to handle this.
 
 **1. Source or create a ROS accessible virtual environment**
-- The `--system-site-packages` flag will enable the virtual environment access the global ROS2 `rclpy` libraries
+- The `--system-site-packages` flag will enable the virtual environment access 
+the global ROS2 `rclpy` libraries
 ```
 (Inside your own desired venvs folder create a ros2_env)
 python3 -m venv ros2_venv --system-site-packages
@@ -104,7 +125,8 @@ cd gym_gazebo_sim
 ```
 
 **4. Sourcing the API's prebuilt ROS2 workspace:**
-- This step is required if you want to use the prebuilt environments that `gym-gazebo-sim` offers.
+- This step is required if you want to use the prebuilt environments that 
+`gym-gazebo-sim` offers.
 
 ```
 (Inside the root folder gym_gazebo_sim)
@@ -121,24 +143,9 @@ cd training_scripts
 OR
 ./train_linefollower.py
 ```
-- If the installation was successful you will see the cartpole robot learning to balance or a robot learning to follow a line.
+- If the installation was successful you will see the cartpole robot learning 
+to balance or a robot learning to follow a line.
 
-**6. Importing the custom reset plugin:**
-- This step is required for users that want to build their own environment using `gym_gazebo_sim` since the API uses a custom reset plugin that teleports all non-static entities back to their spawn points.
-- The command below will copy the API's `custom_plugins` package to your ROS2 workspace's source folder.
-
-```
-(Inside the root folder gym_gazebo_sim)
-cp -r ros2_ws/src/custom_plugins/ /path/to/your/workspace/src/
-```
-
-- To enable the plugin for your world, simply add the following lines inside the `<world></world>` tags of your `.sdf` world file:
-```
-<plugin
-	filename="libResetSimPlugin.so"
-	name="reset_plugin::ResetSimPlugin">
-</plugin>
-```
 ### Usage Examples:
 
 - This example shows how to use the prebuilt environments that the API comes with:
@@ -169,7 +176,8 @@ def main():
 	
 ```
 
-- This example shows how to inherit from the `GazeboEnv` class to make your own environment:
+- This example shows how to inherit from the `GazeboEnv` class to make your own 
+environment:
 ```
 import gymnasium as gym
 from gym_gazebo import GazeboEnv
@@ -211,13 +219,38 @@ class CustomEnv(GazeboEnv):
 	def user_close(self):
 		# Close down any ros2 nodes you made in this class or process observations.
 ```
+
+## Reset Plugin Aside
+
+**Importing the custom reset plugin:**
+- This step is required for users that want to build their own environment 
+using `gym_gazebo_sim` since the API uses a custom reset plugin that teleports 
+all non-static entities back to their spawn points.
+- The command below will copy the API's `custom_plugins` package to your ROS2 
+workspace's source folder.
+
+```
+(Inside the root folder gym_gazebo_sim)
+cp -r ros2_ws/src/custom_plugins/ /path/to/your/workspace/src/
+```
+
+- To enable the plugin for your world, simply add the following lines inside 
+the `<world></world>` tags of your `.sdf` world file:
+```
+<plugin
+	filename="libResetSimPlugin.so"
+	name="reset_plugin::ResetSimPlugin">
+</plugin>
+```
+
 ## Help
 
-Please email me at taigasery78@gmail.com or miti@phas.ubc.ca for help or raise an issue on this GitHub page.
+Please email me at taigasery78@gmail.com or miti@phas.ubc.ca for help or raise 
+an issue on this GitHub page.
 ## Authors
 
 - [Taiga Momose](https://www.linkedin.com/in/taiga-momose/)
-- [Miti Isbasescu](https://projectlab.engphys.ubc.ca/location/)
+- [Miti Isbasescu](https://projectlab.engphys.ubc.ca/)
 
 ## Version History
 
@@ -226,7 +259,8 @@ Please email me at taigasery78@gmail.com or miti@phas.ubc.ca for help or raise a
 
 ## License
 
-This project is licensed under the [MIT] License - see the LICENSE.md file for details
+This project is licensed under the [MIT] License - see the LICENSE.md file for 
+details
 
 ## Acknowledgments
 
