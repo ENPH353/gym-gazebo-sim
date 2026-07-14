@@ -14,7 +14,7 @@ dependencies = [
 requires-python = ">=3.12.3"
 authors = [
     {name="Taiga Momose", email="taigasery78@gmail.com" },
-    { name="Miti Isbasescu", email="miti@phas.ubc.ca" },
+    {name="Miti Isbasescu", email="miti@phas.ubc.ca" },
 ]
 description = "A package to provide a gym environment for Gazebo simulation."
 readme = "README.md"

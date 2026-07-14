@@ -16,9 +16,13 @@ class CartpoleEnv(GazeboEnv):
         rclpy.init(args=None)
 
         # Passing arguments to parent class
-        super(CartpoleEnv, self).__init__('my_agent_bringup',
-                                          'my_cartpole.launch.xml',
-                                          'cartpole_gym')
+        # super(CartpoleEnv, self).__init__('my_agent_bringup',
+        #                                   'my_cartpole.launch.xml',
+        #                                   'cartpole_gym')
+
+        super(CartpoleEnv, self).__init__(launch_pkg='cartpole_ros',
+                                          launch_file='my_cartpole.launch.xml',
+                                          world_name='cartpole_world')
 
         # Setting up ROS2 nodes
         self.ros_node = RosNode('cartpole_RL')
