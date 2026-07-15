@@ -16,9 +16,13 @@ class LineFollowerEnv(GazeboEnv):
         rclpy.init(args=None)
 
         # Passing arguments to parent class
-        super(LineFollowerEnv, self).__init__('my_agent_bringup',
-                                            'my_agent.launch.xml',
-                                            'monza_gym')
+        # super(LineFollowerEnv, self).__init__('my_agent_bringup',
+        #                                     'my_agent.launch.xml',
+        #                                     'monza_gym')
+        
+        super(LineFollowerEnv, self).__init__(launch_pkg='linefollow_ros',
+                                    launch_file='my_agent.launch.xml',
+                                    world_name='monza_gym')
 
         # Setting up ROS2 node
         self.ros_node = RosNode('line_follower_RL')

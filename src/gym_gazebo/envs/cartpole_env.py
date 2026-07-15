@@ -15,10 +15,6 @@ class CartpoleEnv(GazeboEnv):
         rclpy.init(args=None)
 
         # Passing arguments to parent class
-        # super(CartpoleEnv, self).__init__('my_agent_bringup',
-        #                                   'my_cartpole.launch.xml',
-        #                                   'cartpole_gym')
-
         super(CartpoleEnv, self).__init__(launch_pkg='cartpole_ros',
                                           launch_file='my_cartpole.launch.xml',
                                           world_name='cartpole_world')
@@ -124,7 +120,10 @@ class CartpoleEnv(GazeboEnv):
 
         self.print_state("Reset: ", self.latest_state)
 
-        return self.latest_state, {}
+        # Zero position and speed (speed up learning)
+        simpler_state = [0, 0, self.latest_state[2], self.latest_state[3]]
+
+        return simpler_state, {}
 
     def step(self, action: int):
         """!
@@ -166,8 +165,11 @@ class CartpoleEnv(GazeboEnv):
 
         self.print_state("Step: ", self.latest_state)
 
+        # Zero position and speed (speed up learning)
+        simpler_state = [0, 0, self.latest_state[2], self.latest_state[3]]
+
         truncated = False # We don't use this variable but we need to return it
-        return self.latest_state, reward, terminated, truncated, {}
+        return simpler_state, reward, terminated, truncated, {}
 
 
     ### HELPER FUNCTIONS:

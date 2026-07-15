@@ -9,8 +9,8 @@
 
     <xacro:property name="camera_side_length" value="0.03" /> 
 
-    <xacro:include filename="$(find my_agent_description)/urdf/robot/common_properties.xacro" />
-    <xacro:include filename="$(find my_agent_description)/urdf/robot/mobile_base_gazebo.xacro" />
+    <xacro:include filename="$(find linefollow_ros)/urdf/common_properties.xacro" />
+    <xacro:include filename="$(find linefollow_ros)/urdf/mobile_base_gazebo.xacro" />
 
     <material name="green">
         <color rgba="0 0.6 0 1" />
