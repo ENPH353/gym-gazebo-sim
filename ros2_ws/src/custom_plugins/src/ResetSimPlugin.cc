@@ -143,7 +143,7 @@ void ResetSimPlugin::PreUpdate(
     {
         if (_ecm.HasEntity(robot_entity))
         {
-            std::cout << "Entity resetting." << std::endl;
+            // std::cout << "Entity resetting." << std::endl;
             found_something_to_reset = true;
 
             // Teleport back to the settled snapshot
@@ -166,8 +166,8 @@ void ResetSimPlugin::PreUpdate(
     }
 
     if (found_something_to_reset) {
-        std::cout << "[ResetSimPlugin] Successfully teleported agents to "
-                     "settled spawn points!" << std::endl;
+        // std::cout << "[ResetSimPlugin] Successfully teleported agents to "
+        //              "settled spawn points!" << std::endl;
     } else {
         std::cout << "[ResetSimPlugin] Reset Failed: No dynamic models found "
                      "in memory!" << std::endl;

@@ -49,7 +49,8 @@ def main(args=None):
             loss_tensor.backward()
             optimizer.step()
 
-            print("Iteration: {} -> Loss: {}".format(iter_no, loss_tensor.item()))
+            print("========== Iteration: {} -> Loss: {}".
+                  format(iter_no, loss_tensor.item()))
 
             # Print batch statistics
             print("%d: loss=%.3f, reward_mean=%.1f, reward_bound=%.1f" % (
@@ -114,16 +115,18 @@ def generate_batches(env, net, batch_size):
     sm = nn.Softmax(dim=1) # Softmax object used to convert raw NN outputs to probabilities
     
     # INDEX:
-        # 0: pole angle (rad)
-        # 1: cart position (m)
-        # 2: pole angular velocity (rad/s)
-        # 3: cart velocity (m/s)  
+        # 0: cart position (m)
+        # 1: cart velocity (m/s)  
+        # 2: pole angle (rad)
+        # 3: pole angular velocity (rad/s)
     obs, _ = env.reset() # First observation
 
     print(obs)
 
     # Main iteration loop
+    i=0
     while True:
+        i += 1
         obs_tensor = torch.tensor(np.array([obs]), dtype=torch.float32) # Turn into a tensor to pass into the NN
         
         act_prob_tensor = sm(net(obs_tensor)) # Action probabilities
@@ -142,6 +145,7 @@ def generate_batches(env, net, batch_size):
 
         # Run one simulation step using the action we sampled.
         next_obs, reward, is_done, _, _ = env.step(action)
+        #print("Step: {} | reward: {} | is_done: {}".format(i, reward, is_done))
 
         current_episode_reward += reward
         current_step_list.append(Step(observation=obs, action=action))
@@ -154,6 +158,7 @@ def generate_batches(env, net, batch_size):
             current_episode_reward = 0.0
             current_step_list = []
             next_obs, _ = env.reset()
+            i = 0
 
             # Resetting and returning a batch
             if len(batch) == batch_size:
