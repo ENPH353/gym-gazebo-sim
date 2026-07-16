@@ -26,7 +26,7 @@ setup(
 
         # Robot models
         (os.path.join('share', package_name, 'urdf'), glob('urdf/*.xacro')),
-        (os.path.join('share', package_name, 'config'), glob('urdf/config/*')),
+        (os.path.join('share', package_name, 'urdf/config'), glob('urdf/config/*')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
