@@ -99,7 +99,7 @@
   <gazebo>
     <plugin filename="libgz_ros2_control-system"
             name="gz_ros2_control::GazeboSimROS2ControlPlugin">
-      <parameters>$(find my_agent_description)/urdf/cartpole/config/cartpole_manager.yaml</parameters>
+      <parameters>$(find cartpole_ros)/urdf/cartpole/config/cartpole_manager.yaml</parameters>
       <controller_manager_prefix_node_name>cartpole_manager</controller_manager_prefix_node_name>
     </plugin>
   </gazebo>
