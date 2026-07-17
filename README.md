@@ -70,7 +70,7 @@ spawn positions and joint states.
   
   The plugin can be added to any custom workspace by just copy and pasting the 
   package directory (see install instructions) into your own ROS2 workspace 
-  folder, and then adding the following tags to your `.sdf`:
+  folder, and then adding the following tags to your world `.sdf` file:
   
 ```
 <plugin

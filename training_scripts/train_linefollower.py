@@ -35,7 +35,6 @@ def main():
                 best_future_value = np.max(q_table[next_state])
                 q_table[state, action] = current_value + alpha * (reward + gamma * best_future_value - current_value)
 
-
                 state = next_state
                 total_reward += reward
 

@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 import torch
 import time
-import gym_gazebo
 
 import numpy as np
 import torch.nn as nn
 import torch.optim as optim
+
+import gym_gazebo
 import gymnasium as gym
 
 from collections import namedtuple
@@ -90,13 +91,11 @@ class NeuralNet(nn.Module):
     def forward(self, obs):
         return self.net(obs)
 
-
 # Stores the total reward of the episode and the steps taken within it
 Episode = namedtuple('Episode', field_names=['reward', 'steps'])
 
 # Stores information about each step
 Step = namedtuple('Step', field_names=['observation', 'action'])
-
 
 def generate_batches(env, net, batch_size):
     '''

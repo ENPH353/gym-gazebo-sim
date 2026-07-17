@@ -1,6 +1,5 @@
 # Custom gymnasium environment for cartpole training
 import rclpy
-import time
 import math
 import numpy as np
 import gymnasium as gym
@@ -88,7 +87,6 @@ class CartpoleEnv(GazeboEnv):
         @return state of the system after reset
         """
         self.is_resetting = True
-        # print("*** RESETTING...")
 
         # Unpause the sim
         self._pause_sim(False)
@@ -103,8 +101,6 @@ class CartpoleEnv(GazeboEnv):
         self._reset_agents()
         self.is_resetting = False
 
-        #print("RESET: Waiting for new data...")
-
         # Wait for next observation to come in
         data = self.latest_obs
         while data is None:
@@ -113,15 +109,17 @@ class CartpoleEnv(GazeboEnv):
             data = self.latest_obs
         self.latest_obs = None
 
-        #print("RESET: Acquired new data.")
-
         # Pause the sim
         self._pause_sim(True)
 
         self.print_state("Reset: ", self.latest_state)
 
-        # Zero position and speed (speed up learning)
-        simpler_state = [0, 0, self.latest_state[2], self.latest_state[3]]
+        # Zero position and speed (speed up learning). Comment this line to see
+        # how the policy converges slower but with a more robust behaviour. 
+        # Ensure you also comment out the step() function equivalent line.
+        # simpler_state = np.array([0, 0, 
+        #   self.latest_state[2], self.latest_state[3]])
+        simpler_state = np.array(self.latest_state).astype(np.float32)
 
         return simpler_state, {}
 
@@ -135,7 +133,6 @@ class CartpoleEnv(GazeboEnv):
             - **terminated** (bool): _True_ episode is done. _False_ otherwise
             - **other** (dictionary): catch all variable for other data
         """
-        # print("STEP...")
         # Process the action
         self.current_vel += 0.2 if action == 1 else -0.2
 
@@ -166,7 +163,9 @@ class CartpoleEnv(GazeboEnv):
         self.print_state("Step: ", self.latest_state)
 
         # Zero position and speed (speed up learning)
-        simpler_state = [0, 0, self.latest_state[2], self.latest_state[3]]
+        #simpler_state = np.array([0, 0, 
+        #   self.latest_state[2], self.latest_state[3]]).astype(np.float32)
+        simpler_state = np.array(self.latest_state).astype(np.float32)
 
         truncated = False # We don't use this variable but we need to return it
         return simpler_state, reward, terminated, truncated, {}
@@ -177,6 +176,14 @@ class CartpoleEnv(GazeboEnv):
     def process_obs(self, state, x_limit, theta_limit):
         """!
         @brief process an observation 
+        @param state (tuple of floats): the x, x_dot, theta, theta_dot
+        @param x_limit (float): maximum x for which cartpole is still in bounds
+        @param thetam_limit (float): maximum theta for which cartpole is still
+                 in bounds
+        @return reward (float): +1 for every observation which did is still in
+                  bounds
+        @return terminated (bool): indicates the cartpole is out of bounds and 
+                  episdoe should be terminated
         """
         x_abs     = abs(state[0])
         theta_abs = abs(state[2])
@@ -198,8 +205,9 @@ class CartpoleEnv(GazeboEnv):
 
     def print_state(self, msg=None, state=[0, 0, 0, 0]):
         """!
-        @brief print state formated nicely
-        @param state (tuple of floats)
+        @brief print cartpole state formated nicely
+        @param msg (string): a message to prepend to state printout
+        @param state (tuple of floats): x, x_dot, theta, theta_dot
         """
         return
         print(msg, "x: {:.3f} | x_dot: {:.3f} | "
