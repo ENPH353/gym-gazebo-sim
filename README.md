@@ -221,6 +221,12 @@ class CustomEnv(GazeboEnv):
 	def user_close(self):
 		# Close down any ros2 nodes you made in this class or process observations.
 ```
+- As a summary see the diagram below for the updates you need to make in order to
+create a new environment and training script (in this case we assume line following is
+the new environment we are creating).
+
+<img width="747" height="439" alt="Screenshot_20260716_222146" src="https://github.com/user-attachments/assets/0ee1a2a5-ae0c-45bc-ad2f-d8e633f35675" />
+
 
 ## Reset Plugin Aside
 
