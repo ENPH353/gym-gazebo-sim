@@ -4,6 +4,12 @@ Gym-Gazebo-Sim is a simple wrapper and Gazebo plugin that extends the Gymnasium
 API for Gazebo Sim Harmonic and ROS2 Jazzy for developers and researchers 
 seeking to use Gazebo Sim for reinforcement learning.
 
+Below is a video using the Gym-Gazebo-Sim toolkit training on the cartpole problem using cross entropy learning.
+
+https://github.com/user-attachments/assets/7ad5e16a-d9d5-4c1f-b53f-ca5b15a662e7
+
+
+
 ## Description
 
 Gym-Gazebo-Sim provides an abstract class with helper methods called 
