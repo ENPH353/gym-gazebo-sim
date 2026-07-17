@@ -15,6 +15,8 @@ The API also provides a ROS2 workspace that comes installed with packages for
 prebuilt environments and a C++ reset plugin that users can call which 
 teleports all non-static entities back to their starting positions.
 
+For more details see the [Gym Gazebo Sim whitepaper](Gym-Gazebo-Sim-Whitepaper_v1.0) added to the repository.
+
 #### Features:
 - Currently, the API provides an abstract class called `GazeboEnv` that 
 inherits the standard gymnasium `Env` class with the following helper methods 
