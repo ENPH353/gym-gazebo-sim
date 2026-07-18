@@ -282,6 +282,7 @@ details
 * Erle Robotics for [gym-gazebo](https://github.com/erlerobot/gym-gazebo/)
 * AcutronicRobotics for [gym-gazebo2](https://github.com/acutronicRobotics/gym-gazebo2)
 * The Farama Foundation for [the Gymnasium API](https://github.com/farama-foundation/gymnasium)
+* Maxim Lapan for [Deep Reinforcement Learning Hands-On](https://github.com/PacktPublishing/Deep-Reinforcement-Learning-Hands-On-Third-Edition#other-related-books) for RL techniques
 * Google for coding assistance with [Google Gemini](https://gemini.google.com)
 
 
