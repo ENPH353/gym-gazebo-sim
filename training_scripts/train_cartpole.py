@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+
+# The code below was heavily inspired from "Deep Reinforcement Learning Hands-On" 
+# by Maxim Lapan.
+
 import torch
 import time
 
